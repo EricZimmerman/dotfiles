@@ -1,0 +1,4 @@
+" git clone https://github.com/catppuccin/vim.git ~/.vim/pack/vendor/start/catppuccin
+syntax on
+colorscheme catppuccin_mocha
+set relativenumber 
