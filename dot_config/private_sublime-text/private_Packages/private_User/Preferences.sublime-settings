@@ -1,0 +1,11 @@
+{
+	"theme": "Adaptive.sublime-theme",
+	"font_face": "JetBrainsMono Nerd Font Mono",
+	"font_size": 12,
+	"hardware_acceleration": "opengl",
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"color_scheme": "Catppuccin Mocha.sublime-color-scheme",
+}
