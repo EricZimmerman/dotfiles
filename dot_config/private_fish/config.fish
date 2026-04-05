@@ -4,7 +4,7 @@ if status is-interactive
     set -g fish_greeting
 
     alias cat="bat"
-    alias ssh="kitty +kitten ssh"
+    #    alias ssh="kitty +kitten ssh"
 
     abbr -a --position anywhere -- --help '--help | bat -plhelp'
     abbr -a --position anywhere -- -h '-h | bat -plhelp']
