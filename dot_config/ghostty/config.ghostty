@@ -4,5 +4,5 @@ window-height = 40
 
 shell-integration-features = sudo,ssh-terminfo,ssh-env
 scrollback-limit = 100000000
-right-click-action = copy-or-paste
+#right-click-action = copy-or-paste
 copy-on-select = clipboard
