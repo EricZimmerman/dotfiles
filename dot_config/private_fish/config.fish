@@ -14,3 +14,7 @@ if status is-interactive
 
     starship init fish | source
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/eric/.local/bin" $PATH

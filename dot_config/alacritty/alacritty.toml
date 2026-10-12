@@ -10,6 +10,14 @@ general.import = [
    "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
+[selection]
+save_to_clipboard = true
+
+[mouse]
+bindings = [
+    { mouse = "Right", action = "Paste" }
+]
+
 [window.dimensions]
 columns = 250
 lines = 50
