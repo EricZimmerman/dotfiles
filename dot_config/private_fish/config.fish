@@ -5,6 +5,7 @@ if status is-interactive
 
     alias cat="bat"
     #    alias ssh="kitty +kitten ssh"
+    alias ssh='ghostty +ssh --'
 
     abbr -a --position anywhere -- --help '--help | bat -plhelp'
     abbr -a --position anywhere -- -h '-h | bat -plhelp']
