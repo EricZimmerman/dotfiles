@@ -11,3 +11,7 @@ scrollback-limit = 100000000
 copy-on-select = clipboard
 #term = xterm-256color
 
+clipboard-write = deny
+middle-click-action = clipboard-paste
+#gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+
