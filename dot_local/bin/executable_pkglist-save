@@ -1,0 +1,12 @@
+#!/bin/sh
+# Saves the explicitly installed packages into the chezmoi source (pkglist/),
+# so a reinstall can restore them (run_onchange_after_install-packages.sh).
+# Runs daily from pkglist-save.timer; commit with: chezmoi git -- add -A && chezmoi git -- commit -m "pkglist"
+set -eu
+dir="$(chezmoi source-path)/pkglist"
+mkdir -p "$dir"
+pacman -Qqen > "$dir/pacman-native.txt"    # from the repositories
+pacman -Qqem > "$dir/pacman-foreign.txt"   # AUR and local builds (paru)
+if command -v flatpak >/dev/null 2>&1; then
+    flatpak list --app --columns=application > "$dir/flatpak.txt" 2>/dev/null || true
+fi

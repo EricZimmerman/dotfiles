@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Penguin Mail
+Comment=Keeps Gmail in sync from the system tray
+Exec="/usr/bin/penguin-mail" --background
+Icon=io.github.c9dev.PenguinMail
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

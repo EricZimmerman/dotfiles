@@ -1,0 +1,6 @@
+[Unit]
+Description=Save the installed package list into the chezmoi source
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/pkglist-save

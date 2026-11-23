@@ -1,0 +1,5 @@
+# Herdr app writes these into every mod folder on start
+.config/herdr-app/mods/*/gpui-kit.d.ts
+
+# package lists read by run_onchange_after_install-packages.sh, not files for ~
+pkglist/

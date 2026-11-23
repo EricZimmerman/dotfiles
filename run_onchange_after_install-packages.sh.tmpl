@@ -1,0 +1,35 @@
+#!/bin/sh
+# Installs any package from pkglist/ that is missing, then enables the daily list export.
+# Re-runs whenever a list changes; on a machine that already has everything it does nothing
+# (no sudo prompt).
+# native  {{ include "pkglist/pacman-native.txt" | sha256sum }}
+# foreign {{ include "pkglist/pacman-foreign.txt" | sha256sum }}
+# flatpak {{ include "pkglist/flatpak.txt" | sha256sum }}
+set -eu
+src="{{ .chezmoi.sourceDir }}/pkglist"
+tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
+pacman -Qq | sort > "$tmp/have"
+
+# Repository packages: only names the repositories still offer.
+pacman -Slq | sort -u > "$tmp/repo"
+sort -u "$src/pacman-native.txt" | comm -23 - "$tmp/have" | comm -12 - "$tmp/repo" > "$tmp/native"
+if [ -s "$tmp/native" ]; then
+    echo "Installing $(wc -l < "$tmp/native") repository packages"
+    sudo pacman -S --needed $(cat "$tmp/native")
+fi
+
+# AUR / foreign packages (paru is in the native list on CachyOS).
+sort -u "$src/pacman-foreign.txt" | comm -23 - "$tmp/have" > "$tmp/foreign"
+if [ -s "$tmp/foreign" ] && command -v paru >/dev/null 2>&1; then
+    echo "Installing $(wc -l < "$tmp/foreign") AUR packages: $(tr '\n' ' ' < "$tmp/foreign")"
+    paru -S --needed $(cat "$tmp/foreign") || echo "Some AUR packages failed; check the list above."
+fi
+
+if [ -s "$src/flatpak.txt" ] && command -v flatpak >/dev/null 2>&1; then
+    flatpak list --app --columns=application | sort > "$tmp/fhave"
+    sort -u "$src/flatpak.txt" | comm -23 - "$tmp/fhave" > "$tmp/fmissing"
+    [ -s "$tmp/fmissing" ] && flatpak install -y flathub $(cat "$tmp/fmissing")
+fi
+
+systemctl --user daemon-reload
+systemctl --user enable --now pkglist-save.timer >/dev/null 2>&1 || true

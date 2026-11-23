@@ -1,0 +1,19 @@
+[user]
+	email = saericzimmerman@gmail.com
+	name = Eric Zimmerman
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKZwCRKUNBsejqGq2hZwl5DaY4figGt/zSXi7fRiXLC4
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+	allowedSignersFile = /home/eric/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
